@@ -1,3 +1,5 @@
+"""Allows modification of models if logged in"""
 from django.contrib import admin
+from .models import Cryptocoin
 
-# Register your models here.
+admin.site.register(Cryptocoin)

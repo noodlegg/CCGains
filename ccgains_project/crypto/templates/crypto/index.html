@@ -1,0 +1,15 @@
+{% load static %}
+
+{% if top_coin_list %}
+<ol>
+    {% for coin in top_coin_list %}
+    <li>
+        <a href="{% url 'crypto:detail' coin.id %}">
+            {{coin.name}}
+        </a>
+    </li>
+    {% endfor %}
+</ol>
+{% else %}
+<p>No coins available</p>
+{% endif %}
