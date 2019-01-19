@@ -4,12 +4,14 @@
 <ol>
     {% for coin_rank, coin_info in top_coin_list.items %}
     <li>
+        <a href="{% url 'crypto:detail' coin_info.symbol %}">
             rank: {{coin_rank}}, 
             symbol: {{coin_info.symbol}},
             price: {{coin_info.price}},
             cap: {{coin_info.cap}},
             1h change%: {{coin_info.change.hour}},
             24h change%: {{coin_info.change.day}},
+        </a>
     </li>
     {% endfor %}
 </ol>
