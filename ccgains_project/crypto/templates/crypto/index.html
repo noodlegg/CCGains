@@ -1,10 +1,19 @@
 {% load static %}
 
+<h2>market cap: {{market_cap.market_cap}}<br></h2>
+<h3>
+    change%: <br>
+    24h: {{market_cap.change.24h}} <br>
+    1h: {{market_cap.change.1h}} <br>
+    7d: {{market_cap.change.7d}}
+</h3>
+<h4>24h volume: {{market_cap.24h_volume}}</h4>
+
 {% if top_coin_list %}
 <ol>
     {% for coin_rank, coin_info in top_coin_list.items %}
     <li>
-        <a href="{% url 'crypto:detail' coin_info.symbol %}">
+        <a href="{% url 'crypto:detail' coin_symbol=coin_info.symbol %}">
             rank: {{coin_rank}}, 
             symbol: {{coin_info.symbol}},
             price: {{coin_info.price}},

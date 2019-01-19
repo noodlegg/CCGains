@@ -5,5 +5,5 @@ from . import views
 app_name = 'crypto'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<slug:symbol>/', views.DetailView.as_view(), name='detail'),
+    path('<coin_symbol>/', views.detail, name='detail'),
 ]
