@@ -7,3 +7,17 @@
     % change 24hours: {{coin_stats.change.day}}<br>
     current price: {{coin_stats.price}}
 </p>
+
+<h2>User's personal coins below</h2>
+
+{% if user_coins %}
+<ul>
+    {% for coin in user_coins %}
+    <li>
+        Amount: {{coin.amount}} x ${{coin.price}}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>User doesn't have this coin</p>
+{% endif %}

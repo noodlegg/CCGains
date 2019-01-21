@@ -1,9 +1,10 @@
 """Views, as Controller in MVC-architecture"""
-from django.shortcuts import render
 import requests
+from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
+from .models import Cryptocoin
 
 def index(request):
     """Gets JSON data from API as context for index.html"""
@@ -25,13 +26,17 @@ def detail(request, coin_symbol):
     url_stats = 'https://chasing-coins.com/api/v1/std/coin/' + coin_symbol
     url_logo = 'https://chasing-coins.com/api/v1/std/logo/' + coin_symbol
     coin_stats = requests.get(url_stats).json()
+    user_coins = Cryptocoin.objects.filter(symbol=coin_symbol)
     context = {
         'coin_stats': coin_stats,
         'coin_logo': url_logo,
+        'coin_symbol': coin_symbol,
+        'user_coins': user_coins,
         }
     return render(request, 'crypto/detail.html', context)
 
 class SignUp(generic.CreateView):
+    """!comment missing"""
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
