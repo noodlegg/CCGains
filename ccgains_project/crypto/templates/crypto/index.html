@@ -2,7 +2,6 @@
 
 {% load static %}
 
-<<<<<<< HEAD
 {% block title %}CC Gains{% endblock %}
 
 {% block content %}
@@ -21,19 +20,12 @@ Hi {{ user.username }}!
 </h3>
 <h4>24h volume: {{market_cap.24h_volume}}</h4>
 
-=======
->>>>>>> parent of 1aff0c8... Coin detail pages
 {% if top_coin_list %}
 <ol>
     {% for coin_rank, coin_info in top_coin_list.items %}
     <li>
-<<<<<<< HEAD
         <a href="{% url 'crypto:detail' coin_symbol=coin_info.symbol %}">
             rank: {{coin_rank}},
-=======
-        <a href="{% url 'crypto:detail' coin_info.symbol %}">
-            rank: {{coin_rank}}, 
->>>>>>> parent of 1aff0c8... Coin detail pages
             symbol: {{coin_info.symbol}},
             price: {{coin_info.price}},
             cap: {{coin_info.cap}},
