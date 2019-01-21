@@ -9,3 +9,4 @@ class Cryptocoin(models.Model):
     amount = models.DecimalField(max_digits=12, decimal_places=3, default=Decimal('0.000'))
     def __str__(self):
         return self.symbol
+        

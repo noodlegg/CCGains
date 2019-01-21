@@ -9,12 +9,14 @@
 </p>
 
 <h2>User's personal coins below</h2>
-
 {% if user_coins %}
 <ul>
     {% for coin in user_coins %}
     <li>
         Amount: {{coin.amount}} x ${{coin.price}}
+        <a href="{% url 'crypto:detail_edit' coin_symbol=coin_symbol %}">
+            <p>EDIT</p>
+        </a>
     </li>
     {% endfor %}
 </ul>
