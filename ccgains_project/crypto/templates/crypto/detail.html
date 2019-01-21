@@ -21,3 +21,9 @@
 {% else %}
 <p>User doesn't have this coin</p>
 {% endif %}
+
+<form method="POST" class="coinform">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="save">Save</button>
+</form>

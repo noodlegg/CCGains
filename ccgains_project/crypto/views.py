@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from .models import Cryptocoin
+from .forms import CoinForm
 
 def index(request):
     """Gets JSON data from API as context for index.html"""
@@ -26,12 +27,24 @@ def detail(request, coin_symbol):
     url_stats = 'https://chasing-coins.com/api/v1/std/coin/' + coin_symbol
     url_logo = 'https://chasing-coins.com/api/v1/std/logo/' + coin_symbol
     coin_stats = requests.get(url_stats).json()
+    # Filter all coins by the corresponding symbol, I.E. 'ETH' or 'BTC'
     user_coins = Cryptocoin.objects.filter(symbol=coin_symbol)
+    # To save input form if it was submitted
+    if request.method == "POST":
+        form = CoinForm(request.POST)
+        if form.is_valid():
+            coinform = form.save(commit=False)
+            coinform.symbol = coin_symbol
+            coinform.save()
+    else:
+        form = CoinForm()
+    # context sent to the detail.html template
     context = {
         'coin_stats': coin_stats,
         'coin_logo': url_logo,
         'coin_symbol': coin_symbol,
         'user_coins': user_coins,
+        'form': form,
         }
     return render(request, 'crypto/detail.html', context)
 
