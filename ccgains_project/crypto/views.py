@@ -1,6 +1,9 @@
 """Views, as Controller in MVC-architecture"""
 from django.shortcuts import render
 import requests
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views import generic
 
 def index(request):
     """Gets JSON data from API as context for index.html"""
@@ -27,4 +30,9 @@ def detail(request, coin_symbol):
         'coin_logo': url_logo,
         }
     return render(request, 'crypto/detail.html', context)
+
+class SignUp(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
         
