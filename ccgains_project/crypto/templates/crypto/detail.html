@@ -1,9 +1,7 @@
-<p>{{coin_stats}}</p>
+<h1>{{cryptocoin.name}}</h1>
 
-<img src="{{coin_logo}}">
-
-<p>
-    % change 1hour: {{coin_stats.change.hour}}<br>
-    % change 24hours: {{coin_stats.change.day}}<br>
-    current price: {{coin_stats.price}}
-</p>
+{% if error_message %}
+<p><strong>
+    {{error_message}}
+</strong></p>
+{% endif %}
