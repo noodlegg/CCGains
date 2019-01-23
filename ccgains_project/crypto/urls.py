@@ -7,5 +7,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('signup/', views.SignUp.as_view(), name='signup'),
     path('<coin_symbol>/', views.detail, name='detail'),
-    path('<coin_symbol>/edit/', views.detail_edit, name='detail_edit'),
+    path('<coin_symbol>/<coin_id>/', views.detail_edit, name='detail_edit'),
 ]

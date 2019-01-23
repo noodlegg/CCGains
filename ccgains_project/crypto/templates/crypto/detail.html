@@ -13,8 +13,8 @@
 <ul>
     {% for coin in user_coins %}
     <li>
-        Amount: {{coin.amount}} x ${{coin.price}}
-        <a href="{% url 'crypto:detail_edit' coin_symbol=coin_symbol %}">
+        Amount: {{coin.amount}} x ${{coin.price}} and id={{coin.id}}
+        <a href="{% url 'crypto:detail_edit' coin_symbol=coin_symbol coin_id=coin.id %}">
             <p>EDIT</p>
         </a>
     </li>

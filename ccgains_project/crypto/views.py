@@ -1,6 +1,6 @@
 """Views, as Controller in MVC-architecture"""
 import requests
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy, reverse
@@ -50,9 +50,10 @@ def detail(request, coin_symbol):
         }
     return render(request, 'crypto/detail.html', context)
 
-def detail_edit(request, coin_symbol):
+def detail_edit(request, coin_symbol, coin_id):
     """Edit user coins"""
-    user_coins = Cryptocoin.objects.filter(symbol=coin_symbol).first()
+    user_coins = get_object_or_404(Cryptocoin, symbol=coin_symbol, id=coin_id)
+    url_logo = 'https://chasing-coins.com/api/v1/std/logo/' + coin_symbol
     if request.method == "POST":
         form = CoinForm(request.POST, instance=user_coins)
         if form.is_valid():
@@ -62,7 +63,12 @@ def detail_edit(request, coin_symbol):
             return redirect('crypto:detail', coin_symbol=coin_symbol)
     else:
         form = CoinForm(instance=user_coins)
-    return render(request, 'crypto/detail.html', {'form': form})
+    context = {
+        'form': form,
+        'coin_logo': url_logo,
+        'coin_symbol': coin_symbol,
+    }
+    return render(request, 'crypto/detail_edit.html', context)
 
 class SignUp(generic.CreateView):
     """!comment missing"""
