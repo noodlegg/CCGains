@@ -24,31 +24,32 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-2">
+            <div class="col">
                 market cap: {{market_cap.market_cap}}
             </div>
-            <div class="col-2">
-                change%:
+            <div class="col">
+                <div class="col">
+                    change%:
+                </div>
+                <div class="col">
+                    24h: {{market_cap.change.24h}}
+                </div>
+                <div class="col">
+                    1h: {{market_cap.change.1h}}
+                </div>
+                <div class="col">
+                    7d: {{market_cap.change.7d}}
+                </div>
             </div>
-            <div class="col-2">
-                24h: {{market_cap.change.24h}}
-            </div>
-            <div class="col-2">
-                1h: {{market_cap.change.1h}}
-            </div>
-            <div class="col-2">
-                7d: {{market_cap.change.7d}}
-            </div>
-
-            <div class="col-2">
+            <div class="col">
                 24h volume: {{market_cap.24h_volume}}
             </div>
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-sm navbar-custom sticky-top">
+    <nav class="navbar navbar-expand-sm navbar-custom">
 
-        <a class="navbar-brand" style="margin-left: 10px;"><i class="fab fa-btc"></i>CC Gains</a>
+        <a class="navbar-brand" style="margin-left: 10px;"><i class="fab fa-bitcoin" ></i>CC Gains</a>
 
         <button class="navbar-toggler " data-toggle="collapse" data-target="#navbarcollapse">
             <i class="fa fa-bars fa-lg text-white"></i>
@@ -70,30 +71,71 @@
         </div>
     </nav>
 
-    <h2>market cap: {{market_cap.market_cap}}<br></h2>
-    <h3>
-        change%: <br>
-        24h: {{market_cap.change.24h}} <br>
-        1h: {{market_cap.change.1h}} <br>
-        7d: {{market_cap.change.7d}}
-    </h3>
-    <h4>24h volume: {{market_cap.24h_volume}}</h4>
+    <div class="container-fluid sticky-top mb-1" style="background-color: #7C7C7D">
+        <div class="row">
+            <div class="col-1 col-md-1">
+                #
+            </div>
+            <div class="col-2 col-md-1">
+                Name
 
+
+            </div>
+            <div class="col-4 col-md-3">
+                Price
+
+            </div>
+            <div class="col-3 col-md-2">
+                Change 1h
+
+            </div>
+            <div class="col-2 col-md-2">
+                Change 24h
+
+            </div>
+            <div class="col-md-3 d-none d-md-block">
+                Market Cap
+
+            </div>
+        </div>
+    </div>
     {% if top_coin_list %}
-    <ol>
-        {% for coin_rank, coin_info in top_coin_list.items %}
-        <li>
-            <a href="{% url 'crypto:detail' coin_symbol=coin_info.symbol %}">
-                rank: {{coin_rank}},
-                symbol: {{coin_info.symbol}},
-                price: {{coin_info.price}},
-                cap: {{coin_info.cap}},
-                1h change%: {{coin_info.change.hour}},
-                24h change%: {{coin_info.change.day}},
-            </a>
-        </li>
-        {% endfor %}
-    </ol>
+    {% for coin_rank, coin_info in top_coin_list.items %}
+    <div class="container-fluid py-2 border-bottom border-secondary">
+        <div class="row">
+            <div class="col-1 col-md-1">
+                {{coin_rank}}
+            </div>
+            <div class="col-2 col-md-1">
+                <a href="{% url 'crypto:detail' coin_symbol=coin_info.symbol %}">
+                    {{coin_info.symbol}}
+                </a>
+
+
+            </div>
+            <div class="col-4 col-md-3">
+                ${{coin_info.price}}
+
+            </div>
+
+            <div class="col-3 col-md-2">
+                {{coin_info.change.hour}}%
+
+            </div>
+            <div class="col-2 col-md-2">
+                {{coin_info.change.day}}%
+
+            </div>
+            <div class="col-md-3 d-none d-md-block">
+                ${{coin_info.cap}}
+
+            </div>
+            <hr>
+
+        </div>
+    </div>
+</button>
+    {% endfor %}
     {% else %}
     <p>No coins available</p>
     {% endif %}

@@ -1,34 +1,35 @@
 
 .navbar{
-  color:white;
+  color:black;
 }
 .fab{
   font-size: 2rem;
   padding-right:1rem;
-  color: #FFC107;
+  color: black;
   }
-.navbar-brand{
+
+  .navbar-brand{
   font-size: 1.5rem;
 }
 
 .navbar-custom {
-  background-color: #3E2B5B;
+  background-color: #F8F9FA;
 }
 /* change the brand and text color */
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-text {
-  color: white;
+  color: #7C7C7D;
 }
 /* change the link color */
 .navbar-custom .navbar-nav .nav-link {
-  color: white;
+  color: #7C7C7D;
 }
 /* change the color of active or hovered links */
 .navbar-custom .nav-item.active .nav-link,
 .navbar-custom .nav-item:hover .nav-link {
-  color: #FFC107;
+  color: #4A4A4B;
 }
 
 .navbar-toggler-icon{
-  color:white;
+  color:#4A4A4B;
 }
