@@ -6,4 +6,6 @@
     {% csrf_token %}
     {{form.as_p}}
     <button type="submit" class="save">Save</button>
+    <!-- Change the style of CANCEL to a button -->
+    <a href="{% url 'crypto:detail' coin_symbol=coin_symbol %}">Cancel</a>
 </form>
