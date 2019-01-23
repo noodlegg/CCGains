@@ -1,0 +1,9 @@
+<img src="{{coin_logo}}">
+
+<h2>Editing selection</h2>
+
+<form method="POST" class="coinform">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="save">Save</button>
+</form>
