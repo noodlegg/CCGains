@@ -2,6 +2,7 @@
 import requests
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy, reverse
 from django.views import generic
@@ -60,7 +61,7 @@ def detail_edit(request, coin_symbol, coin_id):
             coinform = form.save(commit=False)
             coinform.symbol = coin_symbol
             coinform.save()
-            return redirect('crypto:detail', coin_symbol=coin_symbol)
+            return HttpResponseRedirect(reverse("crypto:detail", args=(coin_symbol,)))
     else:
         form = CoinForm(instance=user_coins)
     context = {
@@ -69,6 +70,20 @@ def detail_edit(request, coin_symbol, coin_id):
         'coin_symbol': coin_symbol,
     }
     return render(request, 'crypto/detail_edit.html', context)
+
+def detail_delete(request, coin_symbol, coin_id):
+    """Delete user coins"""
+    user_coins = get_object_or_404(Cryptocoin, symbol=coin_symbol, id=coin_id)
+    url_logo = 'https://chasing-coins.com/api/v1/std/logo/' + coin_symbol
+    if request.method == "POST":
+        user_coins.delete()
+        return HttpResponseRedirect(reverse("crypto:detail", args=(coin_symbol,)))
+    context = {
+        'coin_logo': url_logo,
+        'coin_symbol': coin_symbol,
+        'user_coins': user_coins,
+    }
+    return render(request, 'crypto/detail_delete.html', context)
 
 class SignUp(generic.CreateView):
     """!comment missing"""

@@ -1,0 +1,10 @@
+<img src="{{coin_logo}}">
+
+<h1>Delete {{user_coins.amount}} x ${{user_coins.price}}?</h1>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    Are you sure you want to delete this coin?
+    <input type="submit" value="Yes"/>
+    <a href="{% url 'crypto:detail' coin_symbol=coin_symbol %}">Cancel</a>
+</form>

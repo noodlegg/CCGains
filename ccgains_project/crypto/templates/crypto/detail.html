@@ -17,6 +17,9 @@
         <a href="{% url 'crypto:detail_edit' coin_symbol=coin_symbol coin_id=coin.id %}">
             <p>EDIT</p>
         </a>
+        <a href="{% url 'crypto:detail_delete' coin_symbol=coin_symbol coin_id=coin.id %}">
+            <p>DELETE</p>
+        </a>
     </li>
     {% endfor %}
 </ul>
