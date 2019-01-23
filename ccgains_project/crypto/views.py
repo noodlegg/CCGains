@@ -1,8 +1,8 @@
 """Views, as Controller in MVC-architecture"""
+import decimal
 import requests
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
-from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy, reverse
 from django.views import generic
@@ -28,9 +28,23 @@ def detail(request, coin_symbol):
     """
     url_stats = 'https://chasing-coins.com/api/v1/std/coin/' + coin_symbol
     url_logo = 'https://chasing-coins.com/api/v1/std/logo/' + coin_symbol
+    url_highlow = 'https://chasing-coins.com/api/v1/std/highlow/' + coin_symbol
     coin_stats = requests.get(url_stats).json()
+    coin_highlow = requests.get(url_highlow).json()
     # Filter all coins by the corresponding symbol, i.e. 'ETH' or 'BTC'
     user_coins = Cryptocoin.objects.filter(symbol=coin_symbol)
+    # Calculate the sum of the user's coins
+    sum_value = 0
+    sum_value_current = 0
+    sum_ath = 0
+    sum_month_h = 0
+    sum_month_l = 0
+    for coins in user_coins:
+        sum_value += (coins.amount * coins.price)
+        sum_value_current += (coins.amount * decimal.Decimal(coin_stats['price']))
+        sum_ath += (coins.amount * decimal.Decimal(coin_highlow['ath']['price_usd']))
+        sum_month_h += (coins.amount * decimal.Decimal(coin_highlow['month_high']['price_usd']))
+        sum_month_l += (coins.amount * decimal.Decimal(coin_highlow['month_low']['price_usd']))
     # To save input form if it was submitted
     if request.method == "POST":
         form = CoinForm(request.POST)
@@ -48,6 +62,11 @@ def detail(request, coin_symbol):
         'coin_symbol': coin_symbol,
         'user_coins': user_coins,
         'form': form,
+        'sum_value': sum_value,
+        'sum_value_current': sum_value_current,
+        'sum_ath': sum_ath,
+        'sum_month_h': sum_month_h,
+        'sum_month_l': sum_month_l,
         }
     return render(request, 'crypto/detail.html', context)
 

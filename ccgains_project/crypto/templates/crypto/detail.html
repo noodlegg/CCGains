@@ -23,6 +23,13 @@
     </li>
     {% endfor %}
 </ul>
+<p>
+    Total sum original: ${{sum_value}}<br>
+    Total sum current: ${{sum_value_current}}<br>
+    All-time high sum: ${{sum_ath}}<br>
+    Sum monthly high: ${{sum_month_h}}<br>
+    Sum monthly low: ${{sum_month_l}}
+</p>
 {% else %}
 <p>User doesn't have this coin</p>
 {% endif %}
