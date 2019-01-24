@@ -1,13 +1,105 @@
-<!DOCTYPE html>
-<html>
+{% load static %}
+<!doctype html>
+<html lang="en">
+
 <head>
+  <!-- Required meta tags -->
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- FontAswsome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+    crossorigin="anonymous">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+
   <title>{% block title %}CC Gains{% endblock %}</title>
 </head>
+
 <body>
+  <div class="container-fluid p-2">
+    <div class="row">
+      <div class="col-5 col-md-4 small">
+        Market Cap: ${{market_cap.market_cap}}
+      </div>
+      <div class="col-md-3 d-none d-md-block small">
+        24h Volume: ${{market_cap.24h_volume}}
+      </div>
+      <div class="col-7 col-md-5 small text-right">
+        change(1h):{{market_cap.change.1h}}% (24h):{{market_cap.change.24h}}% (7d):{{market_cap.change.7d}}%
+      </div>
+
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-sm navbar-custom border-top border-bottom" style="border-color: #F8F9FA;">
+
+    <a class="navbar-brand" style="margin-left: 10px;"><i class="fab fa-bitcoin"></i>CC Gains</a>
+
+    <button class="navbar-toggler " data-toggle="collapse" data-target="#navbarcollapse">
+      <i class="fa fa-bars fa-lg"></i>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-sm-end" id="navbarcollapse">
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="Stats.html">Statistics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Charts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.html">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
   <main>
-    {% block content %}
-    {% endblock %}
+    <div class="container-fluid my-4">
+      <div class="row">
+        <div class="col-10 col-md-8 col-lg-7 align-items-stretch mx-auto">
+          <div class="card">
+            <img class="card-img-top" src="{% static 'img/card1.jpg' %}">
+            <div class="card-body">
+              <p class="card-text">
+                {% block content %}
+                {% endblock %}</p>
+            </div>
+          </div>
+        </div>
+      </div>
   </main>
+
+
+  <hr class="my-2">
+  <div class="jumbotron jumbotron-fluid" style="margin-bottom: 0px;">
+    <div class="container-fluid padding">
+      <div class="row text-center padding">
+        <div class="col-12 pb-2">
+          <h2 class="display-4">Social Media</h2>
+        </div>
+        <div class="col-12 social">
+          <a href="https://www.plus.google.com"><i class="fab fa-google-plus-g fa-lg"></i></a>
+          <a href="https://github.com"><i class="fab fa-github fa-lg"></i> </a>
+          <a href="https://www.twitter.com"><i class="fab fa-twitter fa-lg"></i> </a>
+          <a href="https://www.facebook.com"><i class="fab fa-facebook fa-lg"></i> </a>
+        </div>
+      </div>
+    </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"></script>
 </body>
+
 </html>
