@@ -7,6 +7,7 @@ class Cryptocoin(models.Model):
     symbol = models.CharField(max_length=4)
     price = models.DecimalField(max_digits=6, decimal_places=2, default=Decimal('0.00'))
     amount = models.DecimalField(max_digits=12, decimal_places=3, default=Decimal('0.000'))
+    userid = models.IntegerField(default=1)
     def __str__(self):
         return self.symbol
         

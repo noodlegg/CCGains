@@ -34,7 +34,8 @@ def detail(request, coin_symbol):
     coin_stats = requests.get(url_stats).json()
     coin_highlow = requests.get(url_highlow).json()
     # Filter all coins by the corresponding symbol, i.e. 'ETH' or 'BTC'
-    user_coins = Cryptocoin.objects.filter(symbol=coin_symbol)
+    if(request.user.is_authenticated):
+        user_coins = Cryptocoin.objects.filter(symbol=coin_symbol).filter(userid=request.user.id)
     # Calculate the sum of the user's coins
     sum_value = 0
     sum_value_current = 0
