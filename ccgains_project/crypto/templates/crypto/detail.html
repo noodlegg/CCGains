@@ -98,29 +98,49 @@
         </div>
     </div>
 
-    {% if user_coins %}
-    <ul>
-        {% for coin in user_coins %}
-        <li>
-            Amount: {{coin.amount|intcomma}} x ${{coin.price|floatformat:2|intcomma}} and id={{coin.id}}
-            <a href="{% url 'crypto:detail_edit' coin_symbol=coin_symbol coin_id=coin.id %}">
-                <p>EDIT</p>
-            </a>
-            <a href="{% url 'crypto:detail_delete' coin_symbol=coin_symbol coin_id=coin.id %}">
-                <p>DELETE</p>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% if user_coins %}
+                <ul class="list-group">
+                    {% for coin in user_coins %}
+                    <li class="list-group-item">
+                        Amount: {{coin.amount|intcomma}} x ${{coin.price|floatformat:2|intcomma}}
+                        <div class="text-right">
+                            <a href="{% url 'crypto:detail_edit' coin_symbol=coin_symbol coin_id=coin.id %}" class="btn btn-outline-secondary">EDIT</a>
+                            <a href="{% url 'crypto:detail_delete' coin_symbol=coin_symbol coin_id=coin.id %}" class="btn btn-outline-secondary">DELETE</a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="container padding">
+        <div class="row welcome text-center">
+            <div class="col-12">
+                <h2 class="lead">Statistics</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-6 text-left">
+                <ul class="list-group">
+                    <li class="list-group-item">Total sum starting: ${{sum_value|floatformat:2|intcomma}}</li>
+                    <li class="list-group-item">Total sum current: ${{sum_value_current|floatformat:2|intcomma}}</li>
+                    <li class="list-group-item">All-time high sum: ${{sum_ath|floatformat:2|intcomma}}</li>
+                    <li class="list-group-item">Sum monthly high: ${{sum_month_h|floatformat:2|intcomma}}
+                    <li class="list-group-item">Sum monthly low: ${{sum_month_l|floatformat:2|intcomma}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5">
 
 
-    <p>
-        Total sum original: ${{sum_value|floatformat:2|intcomma}}<br>
-        Total sum current: ${{sum_value_current|floatformat:2|intcomma}}<br>
-        All-time high sum: ${{sum_ath|floatformat:2|intcomma}}<br>
-        Sum monthly high: ${{sum_month_h|floatformat:2|intcomma}}<br>
-        Sum monthly low: ${{sum_month_l|floatformat:2|intcomma}}
-    </p>
     {% else %}
     <div class="container-fluid padding">
         <div class="row welcome text-center">
@@ -132,16 +152,15 @@
     {% endif %}
     <div class="container">
         <div class=row>
-            <div class="col-6 mx-auto">
-                <div class="card text-center">
-                    <div class="card-body p-3">
+            <div class="col-7 mx-auto">
+                <div class="card text-center" style="min-width: width 238px;">
+                    <h5 class="card-title pt-3">Add coins</h5>
+                    <div class="card-body">
                         <form method="POST" class="coinform">
                             {% csrf_token %}
                             {{form.as_p}}
                             <button type="submit" class="save btn btn-outline-secondary">Save</button>
                         </form>
-                        <div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -149,7 +168,7 @@
     </div>
 
 
-
+    <hr class="my-4">
 
     <div class="jumbotron jumbotron-fluid" style="margin-bottom: 0px;">
         <div class="container-fluid padding">
