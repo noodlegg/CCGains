@@ -1,11 +1,149 @@
+{% load static %}
 {% load humanize %}
-<img src="{{coin_logo}}">
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- FontAswsome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+        crossorigin="anonymous">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+
+    <title>CC_Gains</title>
+</head>
+
+<body>
+    <div class="container-fluid p-2">
+        <div class="row">
+            <div class="col-5 col-md-4 small">
+                Market Cap: ${{market_cap.market_cap|intcomma}}
+            </div>
+            <div class="col-md-3 d-none d-md-block small">
+                24h Volume: ${{market_cap.24h_volume|intcomma}}
+            </div>
+            <div class="col-7 col-md-5 small text-right">
+                Change (1h):{{market_cap.change.1h}}% (24h):{{market_cap.change.24h}}% (7d):{{market_cap.change.7d}}%
+            </div>
+
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-sm navbar-custom border-top border-bottom sticky-top" style="border-color: #F8F9FA;">
+
+        <a class="navbar-brand" style="margin-left: 10px;"><i class="fab fa-bitcoin"></i>CC Gains</a>
+
+        <button class="navbar-toggler " data-toggle="collapse" data-target="#navbarcollapse">
+            <i class="fa fa-bars fa-lg"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-sm-end" id="navbarcollapse">
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'crypto:index' %}">Charts</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 text-center">
+                    <div>
+                        <img class="rounded float-left img-thumbnail" src="{{coin_logo}}" />
+                    </div>
+                </div>
+                <div class="col-6 text-center">
+                    <div>
+                        <h2 class="display-4 text-left">{{coin_symbol}}</h2>
+                        <ul class="list-group">
+                            <li class="list-group-item">%Change (1h): {{coin_stats.change.hour}}%</li>
+                            <li class="list-group-item">%Change (24h): {{coin_stats.change.day}}%</li>
+                            <li class="list-group-item">Current Price: ${{coin_stats.price|floatformat:2|intcomma}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="my-4">
+
+    <div class="container">
+        <div class="row welcome text-center">
+            <div class="col-12">
+                <h2 class="lead">Delete Coin</h2>
+            </div>
+        </div>
+        <div class=row>
+            <div class="col-7 mx-auto">
+                <div class="card text-center" style="min-width: width 238px;">
+                    <div class="card-body">
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                           are you sure you want to Delete {{user_coins.amount|intcomma}} x ${{user_coins.price|floatformat:2|intcomma}}?
+                            <input type="submit" value="Yes" />
+                            <a href="{% url 'crypto:detail' coin_symbol=coin_symbol %}" class="btn btn-outline-secondary">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="jumbotron jumbotron-fluid" style="margin-bottom: 0px;">
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12 pb-2">
+                    <h2 class="display-4">Social Media</h2>
+                </div>
+                <div class="col-12 social">
+                    <a href="https://www.plus.google.com" target="_blank"><i class="fab fa-google-plus-g fa-lg"></i></a>
+                    <a href="https://github.com" target="_blank"><i class="fab fa-github fa-lg"></i> </a>
+                    <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter fa-lg"></i> </a>
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook fa-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
 
 <h1>Delete {{user_coins.amount|intcomma}} x ${{user_coins.price|floatformat:2|intcomma}}?</h1>
 
 <form method="POST" action="">
     {% csrf_token %}
     Are you sure you want to delete this coin?
-    <input type="submit" value="Yes"/>
+    <input type="submit" value="Yes" />
     <a href="{% url 'crypto:detail' coin_symbol=coin_symbol %}">Cancel</a>
 </form>
