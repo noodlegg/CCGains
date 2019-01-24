@@ -26,6 +26,8 @@ def detail(request, coin_symbol):
     Gets JSON data from API depending on coin symbol
     that is retrieved from /crypto/urls.py
     """
+    url_market = 'https://chasing-coins.com/api/v1/std/marketcap'
+    market_cap = requests.get(url_market).json()
     url_stats = 'https://chasing-coins.com/api/v1/std/coin/' + coin_symbol
     url_logo = 'https://chasing-coins.com/api/v1/std/logo/' + coin_symbol
     url_highlow = 'https://chasing-coins.com/api/v1/std/highlow/' + coin_symbol
@@ -57,6 +59,7 @@ def detail(request, coin_symbol):
         form = CoinForm()
     # context sent to the detail.html template
     context = {
+        'market_cap': market_cap,
         'coin_stats': coin_stats,
         'coin_logo': url_logo,
         'coin_symbol': coin_symbol,
@@ -74,6 +77,8 @@ def detail_edit(request, coin_symbol, coin_id):
     """Edit user coins"""
     user_coins = get_object_or_404(Cryptocoin, symbol=coin_symbol, id=coin_id)
     url_logo = 'https://chasing-coins.com/api/v1/std/logo/' + coin_symbol
+    url_market = 'https://chasing-coins.com/api/v1/std/marketcap'
+    market_cap = requests.get(url_market).json()
     if request.method == "POST":
         form = CoinForm(request.POST, instance=user_coins)
         if form.is_valid():
@@ -87,6 +92,7 @@ def detail_edit(request, coin_symbol, coin_id):
         'form': form,
         'coin_logo': url_logo,
         'coin_symbol': coin_symbol,
+        'market_cap': market_cap,
     }
     return render(request, 'crypto/detail_edit.html', context)
 
@@ -94,6 +100,8 @@ def detail_delete(request, coin_symbol, coin_id):
     """Delete user coins"""
     user_coins = get_object_or_404(Cryptocoin, symbol=coin_symbol, id=coin_id)
     url_logo = 'https://chasing-coins.com/api/v1/std/logo/' + coin_symbol
+    url_market = 'https://chasing-coins.com/api/v1/std/marketcap'
+    market_cap = requests.get(url_market).json()
     if request.method == "POST":
         user_coins.delete()
         return HttpResponseRedirect(reverse("crypto:detail", args=(coin_symbol,)))
@@ -101,6 +109,7 @@ def detail_delete(request, coin_symbol, coin_id):
         'coin_logo': url_logo,
         'coin_symbol': coin_symbol,
         'user_coins': user_coins,
+        'market_cap': market_cap,
     }
     return render(request, 'crypto/detail_delete.html', context)
 
