@@ -16,7 +16,7 @@
         crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
 
     <title>CC_Gains</title>
 </head>
@@ -31,7 +31,7 @@
                 24h Volume: ${{market_cap.24h_volume}}
             </div>
             <div class="col-7 col-md-5 small text-right">
-                change(24h): {{market_cap.change.24h}}% 1h: {{market_cap.change.1h}}% 7d: {{market_cap.change.7d}}%
+                change(1h):{{market_cap.change.1h}}% (24h):{{market_cap.change.24h}}% (7d):{{market_cap.change.7d}}%
             </div>
 
         </div>
@@ -130,15 +130,20 @@
     <p>No coins available</p>
     {% endif %}
 
-    <footer class="text-black mt-4">
-        <div class="container-fluid py-3">
-
-            <div class="row">
-                <div class="col-sm-6">Special thanks to: <span class="small"><br>YOU, for being so cool</span></div>
-                <div class="col-sm"></div>
-                <div class="col-sm small text-sm-right">©2018 OneStep, Inc.</div>
-            </div>
-        </div>
+    <div class="jumbotron jumbotron-fluid" style="margin-bottom: 0px;">
+            <div class="container-fluid padding">
+                    <div class="row text-center padding">
+                      <div class="col-12 pb-2">
+                        <h2 class="display-4">Social Media</h2>
+                      </div>
+                      <div class="col-12 social">
+                        <a href="https://www.plus.google.com"><i class="fab fa-google-plus-g fa-lg"></i></a>
+                        <a href="https://github.com"><i class="fab fa-github fa-lg" ></i> </a>
+                        <a href="https://www.twitter.com"><i class="fab fa-twitter fa-lg"></i> </a>
+                        <a href="https://www.facebook.com"><i class="fab fa-facebook fa-lg"></i> </a>
+                        </div>
+                      </div>
+                    </div>
     </footer>
 
     <script src="https://code.jquery.com/jquery.min.js"></script>
