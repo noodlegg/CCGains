@@ -32,7 +32,7 @@
                 24h Volume: ${{market_cap.24h_volume|intcomma}}
             </div>
             <div class="col-7 col-md-5 small text-right">
-                change(1h):{{market_cap.change.1h}}% (24h):{{market_cap.change.24h}}% (7d):{{market_cap.change.7d}}%
+                Change (1h):{{market_cap.change.1h}}% (24h):{{market_cap.change.24h}}% (7d):{{market_cap.change.7d}}%
             </div>
 
         </div>
@@ -50,18 +50,18 @@
 
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'crypto:index' %}">Charts</a>
+                    <a class="nav-link" href="#">Charts</a>
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
                 </li>
                 {% endif %}
-              </ul>
+            </ul>
         </div>
     </nav>
 
@@ -79,7 +79,7 @@
                 Price
 
             </div>
-            <div class="col-3 text-right">
+            <div class="col-3 col-md-2 text-right">
                 change(1h)
 
             </div>
@@ -101,9 +101,9 @@
                 {{coin_rank}}
             </div>
             <div class="col-2 col-md-1">
-                    <h5><a href="{% url 'crypto:detail' coin_symbol=coin_info.symbol %}" class="badge badge-light">
-                    {{coin_info.symbol}}
-                </a></h5>
+                <h5><a href="{% url 'crypto:detail' coin_symbol=coin_info.symbol %}" class="badge badge-light">
+                        {{coin_info.symbol}}
+                    </a></h5>
 
 
             </div>
@@ -135,26 +135,26 @@
     {% endif %}
 
     <div class="jumbotron jumbotron-fluid" style="margin-bottom: 0px;">
-            <div class="container-fluid padding">
-                    <div class="row text-center padding">
-                      <div class="col-12 pb-2">
-                        <h2 class="display-4">Social Media</h2>
-                      </div>
-                      <div class="col-12 social">
-                        <a href="https://www.plus.google.com" target="_blank"><i class="fab fa-google-plus-g fa-lg"></i></a>
-                        <a href="https://github.com" target="_blank"><i class="fab fa-github fa-lg" ></i> </a>
-                        <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter fa-lg"></i> </a>
-                        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook fa-lg"></i> </a>
-                        </div>
-                      </div>
-                    </div>
-    </footer>
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12 pb-2">
+                    <h2 class="display-4">Social Media</h2>
+                </div>
+                <div class="col-12 social">
+                    <a href="https://www.plus.google.com" target="_blank"><i class="fab fa-google-plus-g fa-lg"></i></a>
+                    <a href="https://github.com" target="_blank"><i class="fab fa-github fa-lg"></i> </a>
+                    <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter fa-lg"></i> </a>
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook fa-lg"></i> </a>
+                </div>
+            </div>
+        </div>
+        </footer>
 
-    <script src="https://code.jquery.com/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>
