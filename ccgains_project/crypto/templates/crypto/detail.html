@@ -151,10 +151,14 @@
     </div>
     {% endif %}
     <div class="container">
+        <div class="row welcome text-center">
+            <div class="col-12">
+                <h2 class="lead">Add coins</h2>
+            </div>
+        </div>
         <div class=row>
             <div class="col-7 mx-auto">
                 <div class="card text-center" style="min-width: width 238px;">
-                    <h5 class="card-title pt-3">Add coins</h5>
                     <div class="card-body">
                         <form method="POST" class="coinform">
                             {% csrf_token %}
