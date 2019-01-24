@@ -32,7 +32,7 @@
                 24h Volume: ${{market_cap.24h_volume|intcomma}}
             </div>
             <div class="col-7 col-md-5 small">
-                Change (1h):{{market_cap.change.1h}}% (24h):{{market_cap.change.24h}}% (7d):{{market_cap.change.7d}}%
+                Change (1h): {{market_cap.change.1h}}%   (24h): {{market_cap.change.24h}}%   (7d): {{market_cap.change.7d}}%
             </div>
 
         </div>
@@ -80,11 +80,11 @@
 
             </div>
             <div class="col-3 col-md-2 text-right">
-                change(1h)
+                Change (1h)
 
             </div>
             <div class=" col-3 col-md-2 text-right">
-                change(24h)
+                Change (24h)
 
             </div>
             <div class="col-md-3 d-none d-md-block text-right">
@@ -121,7 +121,7 @@
 
             </div>
             <div class="col-md-3 d-none d-md-block text-right">
-                ${{coin_info.cap|intcomma}}
+                ${{coin_info.cap|floatformat:0|intcomma}}
 
             </div>
             <hr>

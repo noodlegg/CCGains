@@ -31,7 +31,7 @@
                 24h Volume: ${{market_cap.24h_volume|intcomma}}
             </div>
             <div class="col-7 col-md-5 small">
-                Change (1h):{{market_cap.change.1h}}% (24h):{{market_cap.change.24h}}% (7d):{{market_cap.change.7d}}%
+                Change (1h): {{market_cap.change.1h}}%   (24h): {{market_cap.change.24h}}%   (7d): {{market_cap.change.7d}}%
             </div>
 
         </div>
@@ -76,8 +76,8 @@
                     <div>
                         <h2 class="display-4 text-left">{{coin_symbol}}</h2>
                         <ul class="list-group">
-                            <li class="list-group-item">%Change (1h): {{coin_stats.change.hour}}%</li>
-                            <li class="list-group-item">%Change (24h): {{coin_stats.change.day}}%</li>
+                            <li class="list-group-item">Change (1h): {{coin_stats.change.hour}}%</li>
+                            <li class="list-group-item">Change (24h): {{coin_stats.change.day}}%</li>
                             <li class="list-group-item">Current Price: ${{coin_stats.price|floatformat:2|intcomma}}</li>
                         </ul>
                     </div>
@@ -92,7 +92,7 @@
         <div class="row welcome text-center">
             <div class="col-12">
                 <h3 class="lead">Delete Coin</h3>
-                <h2 class="lead">Are you sure you want to Delete {{user_coins.amount|intcomma}} x ${{user_coins.price|floatformat:2|intcomma}}?</h2>
+                <h2 class="lead">Are you sure you want to delete {{user_coins.amount|intcomma}} x ${{user_coins.price|floatformat:2|intcomma}}?</h2>
             </div>
         </div>
         <div class=row>
