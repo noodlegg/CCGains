@@ -1,6 +1,7 @@
+{% load humanize %}
 <img src="{{coin_logo}}">
 
-<h1>Delete {{user_coins.amount}} x ${{user_coins.price}}?</h1>
+<h1>Delete {{user_coins.amount|intcomma}} x ${{user_coins.price|floatformat:2|intcomma}}?</h1>
 
 <form method="POST" action="">
     {% csrf_token %}

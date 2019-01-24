@@ -1,3 +1,4 @@
+{% load humanize %}
 <p>{{coin_stats}}</p>
 
 <img src="{{coin_logo}}">
@@ -5,7 +6,7 @@
 <p>
     % change 1hour: {{coin_stats.change.hour}}<br>
     % change 24hours: {{coin_stats.change.day}}<br>
-    current price: {{coin_stats.price}}
+    current price: {{coin_stats.price|floatformat:2|intcomma}}
 </p>
 
 <h2>User's personal coins below</h2>
@@ -13,7 +14,7 @@
 <ul>
     {% for coin in user_coins %}
     <li>
-        Amount: {{coin.amount}} x ${{coin.price}} and id={{coin.id}}
+        Amount: {{coin.amount|intcomma}} x ${{coin.price|floatformat:2|intcomma}} and id={{coin.id}}
         <a href="{% url 'crypto:detail_edit' coin_symbol=coin_symbol coin_id=coin.id %}">
             <p>EDIT</p>
         </a>
@@ -24,11 +25,11 @@
     {% endfor %}
 </ul>
 <p>
-    Total sum original: ${{sum_value}}<br>
-    Total sum current: ${{sum_value_current}}<br>
-    All-time high sum: ${{sum_ath}}<br>
-    Sum monthly high: ${{sum_month_h}}<br>
-    Sum monthly low: ${{sum_month_l}}
+    Total sum original: ${{sum_value|floatformat:2|intcomma}}<br>
+    Total sum current: ${{sum_value_current|floatformat:2|intcomma}}<br>
+    All-time high sum: ${{sum_ath|floatformat:2|intcomma}}<br>
+    Sum monthly high: ${{sum_month_h|floatformat:2|intcomma}}<br>
+    Sum monthly low: ${{sum_month_l|floatformat:2|intcomma}}
 </p>
 {% else %}
 <p>User doesn't have this coin</p>

@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <!doctype html>
 <html lang="en">
 
@@ -25,10 +26,10 @@
     <div class="container-fluid p-2">
         <div class="row">
             <div class="col-5 col-md-4 small">
-                Market Cap: ${{market_cap.market_cap}}
+                Market Cap: ${{market_cap.market_cap|intcomma}}
             </div>
             <div class="col-md-3 d-none d-md-block small">
-                24h Volume: ${{market_cap.24h_volume}}
+                24h Volume: ${{market_cap.24h_volume|intcomma}}
             </div>
             <div class="col-7 col-md-5 small text-right">
                 change(1h):{{market_cap.change.1h}}% (24h):{{market_cap.change.24h}}% (7d):{{market_cap.change.7d}}%
@@ -104,7 +105,7 @@
 
             </div>
             <div class="col-5 col-sm-4 col-md-3 text-right">
-                ${{coin_info.price}}
+                ${{coin_info.price|floatformat:2|intcomma}}
 
             </div>
 
@@ -117,7 +118,7 @@
 
             </div>
             <div class="col-md-3 d-none d-md-block text-right">
-                ${{coin_info.cap}}
+                ${{coin_info.cap|intcomma}}
 
             </div>
             <hr>
