@@ -103,6 +103,8 @@ def detail_delete(request, coin_symbol, coin_id):
     """Delete user coins"""
     user_coins = get_object_or_404(Cryptocoin, symbol=coin_symbol, id=coin_id)
     url_logo = 'https://chasing-coins.com/api/v1/std/logo/' + coin_symbol
+    url_stats = 'https://chasing-coins.com/api/v1/std/coin/' + coin_symbol
+    coin_stats = requests.get(url_stats).json()
     url_market = 'https://chasing-coins.com/api/v1/std/marketcap'
     market_cap = requests.get(url_market).json()
     if request.method == "POST":
@@ -113,6 +115,7 @@ def detail_delete(request, coin_symbol, coin_id):
         'coin_symbol': coin_symbol,
         'user_coins': user_coins,
         'market_cap': market_cap,
+        'coin_stats': coin_stats,
     }
     return render(request, 'crypto/detail_delete.html', context)
 
