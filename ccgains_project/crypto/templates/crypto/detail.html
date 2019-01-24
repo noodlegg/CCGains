@@ -88,11 +88,11 @@
 
     <hr class="my-4">
 
-
+    {% if user.is_authenticated %}
     <div class="container-fluid padding">
         <div class="row welcome text-center">
             <div class="col-12">
-                <h1 class="display-4 bold">User's personal coins below</h1>
+                <h1 class="display-4 bold">Personal coins</h1>
             </div>
         </div>
     </div>
@@ -169,7 +169,7 @@
             </div>
         </div>
     </div>
-
+    {% endif %}
 
     <hr class="my-4">
 
