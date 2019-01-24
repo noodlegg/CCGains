@@ -91,7 +91,8 @@
     <div class="container">
         <div class="row welcome text-center">
             <div class="col-12">
-                <h2 class="lead">Delete Coin</h2>
+                <h3 class="lead">Delete Coin</h3>
+                <h2 class="lead">Are you sure you want to Delete {{user_coins.amount|intcomma}} x ${{user_coins.price|floatformat:2|intcomma}}?</h2>
             </div>
         </div>
         <div class=row>
@@ -100,8 +101,7 @@
                     <div class="card-body">
                         <form method="POST" action="">
                             {% csrf_token %}
-                           are you sure you want to Delete {{user_coins.amount|intcomma}} x ${{user_coins.price|floatformat:2|intcomma}}?
-                            <button type="submit">Yes</button>
+                            <button type="submit" class="btn btn-outline-secondary">Yes</button>
                             <a href="{% url 'crypto:detail' coin_symbol=coin_symbol %}" class="btn btn-outline-secondary">Cancel</a>
                         </form>
                     </div>
